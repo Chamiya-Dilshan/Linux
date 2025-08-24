@@ -24,5 +24,33 @@ while read username fname lname group;do
         fi
 done < user.txt
 
+or
+
+while read -r username; do
+        # Skip empty lines
+        [[ -z "$username" ]] && continue
+
+        # Check if user already exisits
+        if id "$username" &>/dev/null; then
+                echo "User $username already exists. Skipping."
+        else
+                useradd -m "$username"
+                echo "Created user: $username"
+        fi
+done < user.txt
+
+
 chmod +x create_users.sh
 ./create_users.sh
+
+
+vim remove_users.sh
+
+#!/bin/bash
+## create Users Script
+#
+
+while read -r username; do
+        userdel -r "$username"
+        echo "Deleted  user: $username"
+done < user.txt

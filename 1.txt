@@ -1,0 +1,22 @@
+//1. Create two user groups named as ‘Level3Students ‘ and ‘Level2Students’ with group IDs 400 and 401 respectively. 
+2. Create a user with user name ‘anne’ with full name “Anne Frank”, userID 500 and password ‘’frank123$” and this user should be a member of the group Level3Students. 
+3. Remove the user account anne and the two groups you have created for questions 1 and 2.
+
+sudo groupadd -g 400 Level3Students
+sudo groupadd -g 401 Level2Students
+
+sudo useradd -u 500 -g Level3Students -c "Anne Frank" -m anne
+echo "anne:frank123$" | sudo chpasswd
+
+sudo userdel -r anne
+sudo groupdel Level3Students
+sudo groupdel Level2Students
+
+//Schedule a task to backup all of your data in the directory myPrograms on week days at 11.30 pm.
+
+crontab -e
+30 23 * * 1-5 cp -r ~/myPrograms ~/myPrograms_backup
+
+//Display current Ethernet interface
+
+ip addr show eth0

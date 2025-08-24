@@ -1,0 +1,26 @@
+vim if.sh
+
+#!/bin/bash
+#
+read -p "Enter a Number : " num
+if [ $num -gt 0 ];then
+        echo "Positive"
+else
+        echo "Negative"
+fi
+
+chmod +x if.sh
+./if.sh
+
+vim loop.sh
+
+#!/bin/bash
+
+for i in {1..5}; do
+echo "Number: $i"
+done
+
+read -p "Guess a number: " guess
+while [ "$guess" -ne 7 ]; do
+read -p "Try again: " guess
+done

@@ -1,0 +1,29 @@
+Create a User
+
+sudo useradd -m student1
+sudo passwd student1
+cat /etc/passwd | grep student1
+
+Create a Group and Add a User
+
+sudo groupadd developers
+sudo usermod -aG developers student1
+groups student1
+
+Change the username `student1` to `devuser1`.
+Change the default shell to `/bin/sh`.
+
+sudo usermod -l devuser1 student1
+sudo usermod -s /bin/sh devuser1
+
+ Set Account Expiry and Lock
+
+sudo chage -E 2025-12-31 devuser1
+sudo usermod -L devuser1
+sudo passwd -S devuser1
+sudo usermod -U devuser1
+
+Delete a User and Group
+
+sudo userdel -r devuser1
+sudo groupdel developers

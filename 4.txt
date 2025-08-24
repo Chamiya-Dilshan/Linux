@@ -1,0 +1,28 @@
+vim user.txt
+
+alice Alice Wonder research
+bob Bob Stone devs
+
+vim create_users.sh
+
+#!/bin/bash
+## create Users Script
+#
+
+while read username fname lname group;do
+        [[ -z "$username" || "$username" =~ ^# ]] && continue
+
+        if id "$username" &>/dev/null;then
+                echo "User $username already exists. Skipping..."
+        else
+                if ! getent group "$group" >/dev/null;then
+                        sudo groupadd "$group"
+                        echo "Group $group created."
+                fi
+                sudo useradd -m -c "$fname $lname" -g "$group" "$username"
+                echo "User $username created and added to $group."
+        fi
+done < user.txt
+
+chmod +x create_users.sh
+./create_users.sh
